@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var sqlConnect = require('./config/connect');
+var db = require('./config/connect');
 // 创建 application/x-www-form-urlencoded 编码解析
 var urlencodedParser = bodyParser.urlencoded({
    extended: false
@@ -27,7 +27,7 @@ app.post('/process_post', urlencodedParser, function(req, res) {
       "last_name": req.body.last_name
    };
    console.log(response);
-   var connection = sqlConnect()
+   var connection = db()
    var addSql = 'INSERT INTO user(id,name,password) VALUES(0,?,?)';
    var addSqlParams = [req.body.first_name, req.body.last_name];
    //增
@@ -49,7 +49,7 @@ app.post('/process_post', urlencodedParser, function(req, res) {
 
 // 列表页--读取数据库接口
 app.post('/process_get', urlencodedParser, function(req, res) {
-   var connection = sqlConnect()
+   var connection = db()
    var  sql = 'SELECT * FROM user';
    connection.query(sql,function (err, result) {
       if(err){
