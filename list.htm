@@ -1,11 +1,61 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="http://127.0.0.1:8081/jquery.js"></script>
 <body>
   <br /><br />
 
   <h3>node全栈实例</h3> <br />
 
   插入成功： <br />
-  以下是列表：<br /><br />/
-  123
+  以下是列表：<br /><br />
+  <div class="ret" id="ret"></div>
 </body>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+  $.ajax({
+    url: '/process_get',
+    data: {
+    },
+    dataType: 'json',
+    type: 'POST',
+    cache: false,
+    beforeSend: function() 
+    {
+    },
+    success: function(data) 
+    {
+        if(data) {
+          console.log(data);
+          var html = ''
+          for (var i = 0; i < data.length; i++) {
+             html += data[i]['name'] + data[i]['password']  + "<br><br>"
+          };
+          $('#ret').html(html)
+        }
+    },    
+    error: function(data) 
+    {
+
+    },    
+    complete: function() 
+    {
+    } 
+  });
+});
+
+
+</script>
+<style type="text/css" media="screen">
+   .test{
+    cursor: pointer;
+    display: inline-block
+   } 
+   body{
+    padding: 0px  50px  50px  50px;
+   }
+</style>
 </html>

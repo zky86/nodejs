@@ -2,14 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="http://127.0.0.1:8081/jquery.js"></script>
 <title>Examples</title>
 <body>
     <br />
-    <br />
-
     <h3>node全栈实例</h3>
     <br />
-    <script type="text/javascript" src="http://127.0.0.1:8081/jquery.js"></script>
     姓名:
     <input type="text" name="first_name" id="first_name">
     <br>
@@ -18,7 +16,7 @@
     <input type="password" name="last_name" id="last_name">
     <br />
     <br />
-    <div  id="test">提交</div>
+    <div  id="test" class="test">提交</div>
     <br />
     <br />
 
@@ -30,24 +28,27 @@
           first_name:  $('#first_name').val(),
           last_name:  $('#last_name').val()
         },
-        dataType: 'default or json or script or html',
+        dataType: 'json',
         type: 'POST',
         cache: false,
         beforeSend: function() 
         {
-          
+          console.log(1);
         },
         success: function(data) 
         {
-          
+            console.log(data);
+            if (data.code == 200) {
+                alert("添加成功");
+                location.href = "list.htm"
+            }
         },    
-        error: function() 
+        error: function(data) 
         {
-          
+            console.log(data);
         },    
         complete: function() 
         {
-          
         } 
       });
     });
@@ -56,4 +57,13 @@
     </script>
 
 </body>
+<style type="text/css" media="screen">
+   .test{
+    cursor: pointer;
+    display: inline-block
+   } 
+   body{
+    padding: 0px  50px  50px  50px;
+   }
+</style>
 </html>
